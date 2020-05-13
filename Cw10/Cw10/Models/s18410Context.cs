@@ -63,10 +63,6 @@ namespace Cw10.Models
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.IdEnrollmentNavigation)
                     .WithMany(p => p.Student)
                     .HasForeignKey(d => d.IdEnrollment)

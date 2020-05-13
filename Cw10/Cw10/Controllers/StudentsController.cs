@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cw10.DTOs.Requests;
 using Cw10.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,13 @@ namespace Cw10.Controllers
         public IActionResult GetStudents()
         {
             return Ok(_service.GetStudents());
+        }
+
+        [HttpPut("{index}")]
+        public IActionResult UpdateStudent(string index, UpdateStudentRequest request)
+        {
+            _service.UpdateStudent(index, request);
+            return Ok(index);
         }
     }
 }

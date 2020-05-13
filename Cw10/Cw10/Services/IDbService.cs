@@ -1,4 +1,5 @@
-﻿using Cw10.Models;
+﻿using Cw10.DTOs.Requests;
+using Cw10.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Cw10.Services
     public interface IDbService
     {
         List<Student> GetStudents();
+        void UpdateStudent(string index, UpdateStudentRequest request);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cw10.Middlewares;
 using Cw10.Models;
 using Cw10.Services;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,8 @@ namespace Cw10
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
 
