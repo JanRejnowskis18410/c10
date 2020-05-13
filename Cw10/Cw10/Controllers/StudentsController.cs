@@ -30,7 +30,14 @@ namespace Cw10.Controllers
         public IActionResult UpdateStudent(string index, UpdateStudentRequest request)
         {
             _service.UpdateStudent(index, request);
-            return Ok(index);
+            return Ok();
+        }
+
+        [HttpDelete("{index}")]
+        public IActionResult DeleteStudent(string index)
+        {
+            _service.DeleteStudent(index);
+            return Ok();
         }
     }
 }

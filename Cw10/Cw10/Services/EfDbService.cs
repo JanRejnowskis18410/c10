@@ -44,7 +44,7 @@ namespace Cw10.Services
                     st.LastName = lastName;
                     entry.Property("LastName").IsModified = true;
                 }
-                if (birthDate == null)
+                if (birthDate != null)
                 {
                     entry.Property("BirthDate").IsModified = true;
                 }
@@ -55,6 +55,23 @@ namespace Cw10.Services
                 }
                 _context.SaveChanges();
             }catch (DbUpdateException exc)
+            {
+                throw new DBException(exc.InnerException.Message);
+            }
+        }
+
+        public void DeleteStudent(string index)
+        {
+            try
+            {
+                var student = new Student
+                {
+                    IndexNumber = index
+                };
+                _context.Attach(student);
+                _context.Remove(student);
+                _context.SaveChanges();
+            }catch(DbUpdateException exc)
             {
                 throw new DBException(exc.InnerException.Message);
             }

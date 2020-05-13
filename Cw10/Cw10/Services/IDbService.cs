@@ -11,5 +11,6 @@ namespace Cw10.Services
     {
         List<Student> GetStudents();
         void UpdateStudent(string index, UpdateStudentRequest request);
+        void DeleteStudent(string index);
     }
 }
