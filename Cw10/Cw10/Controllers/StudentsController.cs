@@ -39,5 +39,12 @@ namespace Cw10.Controllers
             _service.DeleteStudent(index);
             return Ok();
         }
+
+        [HttpPost("enroll")]
+        public IActionResult EnrollStudent(EnrollStudentRequest request)
+        {
+            _service.EnrollStudent(request);
+            return Ok();
+        }
     }
 }

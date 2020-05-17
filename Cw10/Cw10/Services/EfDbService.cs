@@ -76,5 +76,35 @@ namespace Cw10.Services
                 throw new DBException(exc.InnerException.Message);
             }
         }
+
+        public void EnrollStudent(EnrollStudentRequest request)
+        {
+            try
+            {
+                if (_context.Student.Count(student => student.IndexNumber.Equals(request.IndexNumber)) > 0)
+                    throw new StudentAlreadyExistsException("Student o podanym indeksie już istnieje w bazie danych!");
+                var studies = _context.Studies.Where(study => study.Name.Equals(request.Studies));
+                if (studies.Any())
+                {
+                    var idStudies = studies.Where(study => study.Name == request.Studies).Select(study => new { study.IdStudy }).First().IdStudy;
+                    var idEnrollment = _context.Enrollment.Where(enrollment => enrollment.IdStudy == idStudies && enrollment.Semester == 1)
+                                                          .OrderByDescending(enrollment => enrollment.StartDate)
+                                                          .Select(enrollment => enrollment.IdEnrollment)
+                                                          .First();
+                }
+                else
+                {
+                    throw new StudiesDoesNotExistException("Studia o podanej nazwie nie istnieją w bazie danych!");
+                }
+                //if(_context.Enrollment.Count(enrollment => enrollment.IdStudy.Equals(idStudies) && ) > 0)
+                //{
+
+                //}
+            }
+            catch (DbUpdateException exc)
+            {
+                throw new DBException(exc.InnerException.Message);
+            }
+        }
     }
 }

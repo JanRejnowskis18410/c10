@@ -43,6 +43,24 @@ namespace Cw10.Middlewares
                 }.ToString());
             }
 
+            if (exc is StudiesDoesNotExistException)
+            {
+                return context.Response.WriteAsync(new ErrorDetails
+                {
+                    StatusCode = (int)StatusCodes.Status400BadRequest,
+                    Message = exc.Message
+                }.ToString());
+            }
+
+            if (exc is StudentAlreadyExistsException)
+            {
+                return context.Response.WriteAsync(new ErrorDetails
+                {
+                    StatusCode = (int)StatusCodes.Status400BadRequest,
+                    Message = exc.Message
+                }.ToString());
+            }
+
             return context.Response.WriteAsync(new ErrorDetails
             {
                 StatusCode = (int)StatusCodes.Status500InternalServerError,
